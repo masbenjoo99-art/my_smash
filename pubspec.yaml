@@ -1,0 +1,57 @@
+name: my_smash
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
+  sqflite: ^2.3.3
+  sqflite_common_ffi: ^2.3.0+4
+  path: ^1.9.0
+  intl: ^0.18.1
+  mobile_scanner: ^6.0.11
+  permission_handler: ^11.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/recyle.png
+    - assets/images/koran.png
+    - assets/images/kaleng.png
+    - assets/images/sisa_makanan.png
+    - assets/images/logo.png
+    - assets/images/banner1.png
+    - assets/images/pana.png
+    - assets/images/bintang5.png
+    - assets/images/profil1.png
+    - assets/images/kain.png
+    - assets/images/metal.png
+    - assets/images/electronik.png
+    - assets/images/plastick_bottle.png
+    - assets/images/newspaper.png
+    - assets/images/trans_bins.png
+    - assets/images/waste_types.png
+    - assets/images/food_waste.png
+    - assets/images/organic_waste.png
+    - assets/images/fabric.png
+    - assets/images/waste.png
+    - assets/images/foto_profil.png
+
+    
+    
+
+
+
+
+
