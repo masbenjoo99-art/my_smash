@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_smash/widgets/app_bar.dart';
 import 'package:my_smash/widgets/bottom_nav_bar.dart';
 import 'package:my_smash/screens/bank_search_page.dart';
+import 'package:my_smash/screens/smart_drop_box_search_page.dart';
 
 /// ====================
 /// 1. HALAMAN UTAMA HISTORY
@@ -225,12 +226,11 @@ class SmartDropBoxHistoryScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                // 👉 sementara arahkan ke halaman pencarian yang sama
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const BankSearchPage(),
+                      builder: (_) => const SmartDropBoxSearchPage(),
                     ),
                   );
                 },

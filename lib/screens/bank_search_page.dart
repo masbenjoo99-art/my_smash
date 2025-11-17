@@ -11,7 +11,7 @@ class BankSearchPage extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(),
       body: const SafeArea(
-        child: BankSearchScreen(), // <-- ini sekarang sudah ketemu
+        child: BankSearchScreen(), 
       ),
       // karena ini dipanggil dari menu History, index-nya samakan dengan History
       bottomNavigationBar: const BottomNavBar(selectedIndex: 2),

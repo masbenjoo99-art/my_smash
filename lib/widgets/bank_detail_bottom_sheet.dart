@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/kategori_harga_screen.dart'; // ✅ TAMBAH IMPORT INI
+import '../screens/kategori_harga_screen.dart';
 
 class BankDetailBottomSheet extends StatelessWidget {
   final Map<String, dynamic> bank;
@@ -28,7 +28,7 @@ class BankDetailBottomSheet extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // ✅ Important: gunakan min
+          mainAxisSize: MainAxisSize.min, 
           children: [
             // Handle bar
             Container(
@@ -140,7 +140,7 @@ class BankDetailBottomSheet extends StatelessWidget {
             ),
             onPressed: () {
               // ✅ UPDATE: Navigate ke kategori harga screen
-              Navigator.pop(context); // Tutup bottom sheet dulu
+              Navigator.pop(context); 
               Navigator.push(
                 context,
                 MaterialPageRoute(

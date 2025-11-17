@@ -3,7 +3,7 @@ import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/waste_category.dart';
 import '../widgets/waste_location_card.dart';
-import '../screens/main_screen.dart'; // ✅ GANTI IMPORT
+import '../screens/main_screen.dart'; 
 import '../db/database_helper.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -79,9 +79,9 @@ class HomeScreen extends StatelessWidget {
 
               // ✅ UPDATE: Smart Drop Box Section
               WasteLocationCard(
-                title: 'Smart Drop Box', // ✅ PERBAIKI TITLE
-                description: 'Temukan Smart Drop Box terdekat!', // ✅ UPDATE DESCRIPTION
-                onSearch: () => _openSmartDropBoxTab(context), // ✅ UPDATE ACTION
+                title: 'Smart Drop Box', 
+                description: 'Temukan Smart Drop Box terdekat!', 
+                onSearch: () => _openSmartDropBoxTab(context), 
               ),
             ],
           ),

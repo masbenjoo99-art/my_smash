@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// ganti ini dengan file screen history-mu yang sudah ada
 import 'package:my_smash/history/history_bank_sampah_screen.dart';
 import 'package:my_smash/history/history_sdb_screen.dart';
 import 'package:my_smash/shared/custom_app_bar.dart';
