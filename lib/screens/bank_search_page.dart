@@ -21,14 +21,11 @@ class BankSearchPage extends StatelessWidget {
           child: Image.asset('assets/images/logo.png', fit: BoxFit.contain),
         ),
       ),
-
       backgroundColor: Colors.white,
       bottomNavigationBar: const BottomNavBar(selectedIndex: 0),
-
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             // 🔵 BANNER
             Container(
               margin: const EdgeInsets.all(16),
@@ -58,11 +55,9 @@ class BankSearchPage extends StatelessWidget {
                   )
                 ],
               ),
-
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   const Text(
                     "Bank Sampah",
                     style: TextStyle(
@@ -88,7 +83,6 @@ class BankSearchPage extends StatelessWidget {
                     height: 520,
                     child: BankSearchScreen(),
                   ),
-
                 ],
               ),
             ),

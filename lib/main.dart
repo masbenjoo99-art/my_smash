@@ -102,14 +102,6 @@ class _SplashScreenState extends State<SplashScreen> {
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Recycle App',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            ),
           ],
         ),
       ),
