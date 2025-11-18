@@ -26,11 +26,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
 
-      // ---------- ACTIONS (tanpa ikon bintang) ----------
+      // ---------- ACTIONS ----------
       actions: [
-        // Forum Diskusi
+        // Forum Diskusi (gambar baru)
         IconButton(
-          icon: const Icon(Icons.forum, color: Colors.white),
           tooltip: 'Forum Diskusi',
           onPressed: () {
             Navigator.push(
@@ -38,18 +37,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               MaterialPageRoute(builder: (_) => Discussion9()),
             );
           },
-        ),
-
-        // Notifikasi
-        IconButton(
-          icon: const Icon(Icons.notifications, color: Colors.white),
-          tooltip: 'Notifikasi',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => NotificationsScreen()),
-            );
-          },
+          icon: Image.asset(
+            'assets/images/coment.png',  // ← Gambar baru yang kamu inginkan
+            width: 24,
+            height: 24,
+            color: Colors.white,        // kalau mau warna asli, hapus baris ini
+          ),
         ),
 
         const SizedBox(width: 4),
