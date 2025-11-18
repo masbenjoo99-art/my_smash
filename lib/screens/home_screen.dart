@@ -3,28 +3,29 @@ import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/waste_category.dart';
 import '../widgets/waste_location_card.dart';
-import '../screens/main_screen.dart'; 
-import '../db/database_helper.dart';
+import '../screens/main_screen.dart';
+import '../screens/bank_search_page.dart';
+import '../screens/smart_drop_box_search_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  // ✅ UPDATE: Navigate ke MainScreen dengan Bank Sampah tab
-  Future<void> _openBankSampahTab(BuildContext context) async {
+  // buka tab Bank Sampah di MainScreen
+  void _openBankSampahTab(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const MainScreen(initialTabIndex: 0), // Tab Bank Sampah
+        builder: (_) => const MainScreen(initialTabIndex: 0),
       ),
     );
   }
 
-  // ✅ TAMBAHAN: Navigate ke MainScreen dengan Smart Drop Box tab
-  Future<void> _openSmartDropBoxTab(BuildContext context) async {
+  // buka tab Smart Drop Box di MainScreen
+  void _openSmartDropBoxTab(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const MainScreen(initialTabIndex: 1), // Tab Smart Drop Box
+        builder: (_) => const MainScreen(initialTabIndex: 1),
       ),
     );
   }
@@ -34,6 +35,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const CustomAppBar(),
+      bottomNavigationBar: const BottomNavBar(selectedIndex: 0),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -41,7 +43,8 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-              // Banner placeholder
+
+              // BANNER ATAS
               Container(
                 height: 150,
                 width: double.infinity,
@@ -55,39 +58,73 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // ✅ UPDATE: Bank Sampah Section
+              // CARD BANK SAMPAH
               WasteLocationCard(
                 title: 'Bank Sampah',
                 description: 'Cari bank sampah di sekitarmu!',
-                onSearch: () => _openBankSampahTab(context), // ✅ UPDATE
-              ),
+                onSearch: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BankSearchPage(),
+                      ),
+                    );
+                  },
+                  footerAssetPath: 'assets/images/icon_bank_sampah.png',
+                ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
 
-              // Waste Categories
-              const Text(
-                'Sampah Yang Dapat Di Daurulang',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+              // CARD SAMPAH YANG DAPAT DI DAURULANG
+              Card(
+                elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: const BorderSide(
+                    color: Color(0xFFD9D9D9),
+                    width: 1,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Sampah Yang Dapat Di Daurulang',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      WasteCategoriesGrid(),
+                    ],
+                  ),
                 ),
               ),
+
               const SizedBox(height: 16),
-              const WasteCategoriesGrid(),
 
+              // CARD SMART DROP BOX
+                WasteLocationCard(
+                  title: 'Smart Drop Box',
+                  description: 'Cari smart drop box di sekitarmu!',
+                  onSearch: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SmartDropBoxSearchPage(),
+                      ),
+                    );
+                  },
+                  footerAssetPath: 'assets/images/icon_smart_drop_box.png',
+                ),
               const SizedBox(height: 24),
-
-              // ✅ UPDATE: Smart Drop Box Section
-              WasteLocationCard(
-                title: 'Smart Drop Box', 
-                description: 'Temukan Smart Drop Box terdekat!', 
-                onSearch: () => _openSmartDropBoxTab(context), 
-              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(selectedIndex: 0),
     );
   }
 }
