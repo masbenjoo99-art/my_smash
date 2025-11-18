@@ -87,14 +87,16 @@ class DatabaseHelper {
   /// ✅ Ambil daftar kota unik KHUSUS BANK SAMPAH - TAMBAHAN BARU
   Future<List<String>> getBankSampahCities() async {
     final db = await database;
-    final result = await db.rawQuery("SELECT DISTINCT city FROM banksampah ORDER BY city");
+    final result =
+        await db.rawQuery("SELECT DISTINCT city FROM banksampah ORDER BY city");
     return result.map((row) => row['city'] as String).toList();
   }
 
   /// ✅ Ambil daftar kota unik KHUSUS SMART DROP BOX - TAMBAHAN BARU
   Future<List<String>> getSmartDropBoxCities() async {
     final db = await database;
-    final result = await db.rawQuery("SELECT DISTINCT city FROM smart_drop_box ORDER BY city");
+    final result = await db
+        .rawQuery("SELECT DISTINCT city FROM smart_drop_box ORDER BY city");
     return result.map((row) => row['city'] as String).toList();
   }
 
@@ -118,7 +120,7 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> searchBankSampah(String query) async {
     final db = await database;
     if (query.isEmpty) return getAllBankSampah();
-    
+
     final lowerQuery = query.toLowerCase();
     return await db.rawQuery('''
       SELECT * FROM banksampah 
@@ -137,9 +139,15 @@ class DatabaseHelper {
         END,
         nama ASC
     ''', [
-      '%$lowerQuery%', '%$lowerQuery%', '%$lowerQuery%', '%$lowerQuery%',
-      '%$lowerQuery%', '%$lowerQuery%',
-      '%$lowerQuery%', '%$lowerQuery%', '%$lowerQuery%'
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%'
     ]);
   }
 
@@ -147,13 +155,13 @@ class DatabaseHelper {
   Future<List<String>> searchBankSampahCities(String query) async {
     final db = await database;
     if (query.isEmpty) return getBankSampahCities();
-    
+
     final result = await db.rawQuery('''
       SELECT DISTINCT city FROM banksampah 
       WHERE LOWER(city) LIKE ? 
       ORDER BY city
     ''', ['%${query.toLowerCase()}%']);
-    
+
     return result.map((row) => row['city'] as String).toList();
   }
 
@@ -161,13 +169,13 @@ class DatabaseHelper {
   Future<List<String>> searchSmartDropBoxCities(String query) async {
     final db = await database;
     if (query.isEmpty) return getSmartDropBoxCities();
-    
+
     final result = await db.rawQuery('''
       SELECT DISTINCT city FROM smart_drop_box 
       WHERE LOWER(city) LIKE ? 
       ORDER BY city
     ''', ['%${query.toLowerCase()}%']);
-    
+
     return result.map((row) => row['city'] as String).toList();
   }
 
@@ -177,7 +185,8 @@ class DatabaseHelper {
   }
 
   /// ✅ Ambil kategori sampah berdasarkan bank sampah ID - TAMBAHAN BARU
-  Future<List<Map<String, dynamic>>> getKategoriSampahByBankId(int bankId) async {
+  Future<List<Map<String, dynamic>>> getKategoriSampahByBankId(
+      int bankId) async {
     final db = await database;
     return await db.query(
       'kategori_sampah',
@@ -196,7 +205,7 @@ class DatabaseHelper {
   /// ✅ Seed data kategori sampah untuk bank tertentu - TAMBAHAN BARU
   Future<void> seedKategoriSampah(int bankSampahId) async {
     final db = await database;
-    
+
     // Cek apakah sudah ada data kategori untuk bank ini
     final existing = await db.query(
       'kategori_sampah',
@@ -204,7 +213,7 @@ class DatabaseHelper {
       whereArgs: [bankSampahId],
       limit: 1,
     );
-    
+
     if (existing.isNotEmpty) {
       debugPrint("🔹 Kategori sampah untuk bank ID $bankSampahId sudah ada");
       return;
@@ -239,13 +248,14 @@ class DatabaseHelper {
     }
 
     await batch.commit(noResult: true);
-    debugPrint("🔹 Seeding ${kategoriData.length} kategori sampah untuk bank ID $bankSampahId selesai");
+    debugPrint(
+        "🔹 Seeding ${kategoriData.length} kategori sampah untuk bank ID $bankSampahId selesai");
   }
 
   /// ✅ Seed kategori untuk Bank Sampah Akar Rumput Janti berdasarkan NAMA, bukan ID - TAMBAHAN BARU
   Future<void> seedKategoriSampahByName() async {
     final db = await database;
-    
+
     // Cari ID bank berdasarkan nama
     final result = await db.query(
       'banksampah',
@@ -254,15 +264,15 @@ class DatabaseHelper {
       whereArgs: ['Bank Sampah Akar Rumput Janti'],
       limit: 1,
     );
-    
+
     if (result.isEmpty) {
       debugPrint("🔹 Bank Sampah Akar Rumput Janti tidak ditemukan");
       return;
     }
-    
+
     final bankId = result.first['id'] as int;
     debugPrint("🔹 Bank Sampah Akar Rumput Janti ditemukan dengan ID: $bankId");
-    
+
     await seedKategoriSampah(bankId);
   }
 
@@ -289,7 +299,7 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> searchSmartDropBox(String query) async {
     final db = await database;
     if (query.isEmpty) return getAllSmartDropBox();
-    
+
     final lowerQuery = query.toLowerCase();
     return await db.rawQuery('''
       SELECT * FROM smart_drop_box 
@@ -304,8 +314,11 @@ class DatabaseHelper {
         END,
         nama ASC
     ''', [
-      '%$lowerQuery%', '%$lowerQuery%', '%$lowerQuery%',
-      '%$lowerQuery%', '%$lowerQuery%'
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%',
+      '%$lowerQuery%'
     ]);
   }
 
@@ -315,7 +328,7 @@ class DatabaseHelper {
     final count = Sqflite.firstIntValue(
       await db.rawQuery('SELECT COUNT(*) FROM smart_drop_box'),
     );
-    
+
     if (count == 0) {
       var batch = db.batch();
 
@@ -443,7 +456,8 @@ class DatabaseHelper {
       } else {
         final dbPath = await getDatabasesPath();
         final path = join(dbPath, 'recycle_app.db');
-        await databaseFactory.deleteDatabase(path); // ✅ FIX: hapus recursive call
+        await databaseFactory
+            .deleteDatabase(path); // ✅ FIX: hapus recursive call
         debugPrint("🔹 Database mobile berhasil dihapus");
       }
       _database = null;
@@ -476,7 +490,8 @@ class DatabaseHelper {
 
       batch.insert('banksampah', {
         'nama': 'Bank Sampah Sorasem 39',
-        'alamat': 'Komp. Museum Karate Kraton Yogyakarta, Jln. Rotowijayan No2, RT 039/RW 011 Kel Kadipaten Kec Kraton Yogyakarta 55132',
+        'alamat':
+            'Komp. Museum Karate Kraton Yogyakarta, Jln. Rotowijayan No2, RT 039/RW 011 Kel Kadipaten Kec Kraton Yogyakarta 55132',
         'city': 'Yogyakarta',
         'latitude': -7.8056,
         'longitude': 110.3647,
@@ -489,7 +504,8 @@ class DatabaseHelper {
 
       batch.insert('banksampah', {
         'nama': 'Bank Sampah Akprind Yogyakarta',
-        'alamat': 'IST AKPRIND Jl. Bimasakti No. 3 Pengok, Gondokusuman, Kota Yogyakarta',
+        'alamat':
+            'IST AKPRIND Jl. Bimasakti No. 3 Pengok, Gondokusuman, Kota Yogyakarta',
         'city': 'Yogyakarta',
         'latitude': -7.7827,
         'longitude': 110.3783,
@@ -606,7 +622,8 @@ class DatabaseHelper {
 
       batch.insert('banksampah', {
         'nama': 'Bank Sampah Pa-Q-One',
-        'alamat': 'Gedongkiwo MJ I031 Yogyakarta RT 55 RW 11 Kel Gedongkiwo Kemantren Mantrijeron',
+        'alamat':
+            'Gedongkiwo MJ I031 Yogyakarta RT 55 RW 11 Kel Gedongkiwo Kemantren Mantrijeron',
         'city': 'Yogyakarta',
         'latitude': -7.8164,
         'longitude': 110.3577,
@@ -748,18 +765,18 @@ class DatabaseHelper {
       });
 
       await batch.commit(noResult: true);
-      print("🔹 Seeding 22 data Bank Sampah Yogyakarta dengan data lengkap selesai");
-      
+      print(
+          "🔹 Seeding 22 data Bank Sampah Yogyakarta dengan data lengkap selesai");
+
       // ✅ UPDATE: Gunakan nama, bukan asumsi ID=1 (lebih robust)
       await Future.delayed(Duration(milliseconds: 100));
       await seedKategoriSampahByName(); // Lebih safe daripada seedKategoriSampah(1)
-      
+
       // ✅ TAMBAHAN: Seed Smart Drop Box
       await seedSmartDropBoxIfEmpty();
-      
     } else {
       print("🔹 Data sudah ada, jumlah: $count");
-      
+
       // ✅ TAMBAHAN: Cek dan seed Smart Drop Box jika belum ada
       await seedSmartDropBoxIfEmpty();
     }

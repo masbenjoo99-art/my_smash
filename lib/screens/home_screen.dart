@@ -63,15 +63,15 @@ class HomeScreen extends StatelessWidget {
                 title: 'Bank Sampah',
                 description: 'Cari bank sampah di sekitarmu!',
                 onSearch: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BankSearchPage(),
-                      ),
-                    );
-                  },
-                  footerAssetPath: 'assets/images/icon_bank_sampah.png',
-                ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const BankSearchPage(),
+                    ),
+                  );
+                },
+                footerAssetPath: 'assets/images/icon_bank_sampah.png',
+              ),
 
               const SizedBox(height: 16),
 
@@ -107,19 +107,19 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 16),
 
               // CARD SMART DROP BOX
-                WasteLocationCard(
-                  title: 'Smart Drop Box',
-                  description: 'Cari smart drop box di sekitarmu!',
-                  onSearch: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const SmartDropBoxSearchPage(),
-                      ),
-                    );
-                  },
-                  footerAssetPath: 'assets/images/icon_smart_drop_box.png',
-                ),
+              WasteLocationCard(
+                title: 'Smart Drop Box',
+                description: 'Cari smart drop box di sekitarmu!',
+                onSearch: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SmartDropBoxSearchPage(),
+                    ),
+                  );
+                },
+                footerAssetPath: 'assets/images/icon_smart_drop_box.png',
+              ),
               const SizedBox(height: 24),
             ],
           ),

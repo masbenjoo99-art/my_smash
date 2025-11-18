@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
-import 'education2.dart'; 
-import 'education3.dart'; 
-import 'education4.dart'; 
-import 'education5.dart'; 
-import 'education6.dart'; 
+import 'education2.dart';
+import 'education3.dart';
+import 'education4.dart';
+import 'education5.dart';
+import 'education6.dart';
 import 'education7.dart';
 
 class EducationScreen extends StatelessWidget {
@@ -14,8 +14,7 @@ class EducationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-      ),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         child: Column(
@@ -59,7 +58,7 @@ class EducationScreen extends StatelessWidget {
               context: context,
               title: 'Daur Ulang Limbah Kain',
               imagePath: 'assets/images/fabric.png',
-              screen:  Education7(),
+              screen: FabricRecyclingScreen(),
             ),
           ],
         ),
@@ -117,7 +116,8 @@ class EducationScreen extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     decoration: BoxDecoration(
                       color: const Color(0xFFC6F7FD),
                       borderRadius: BorderRadius.circular(8),

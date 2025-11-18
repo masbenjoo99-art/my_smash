@@ -34,22 +34,33 @@ class SmartDropBoxSearchScreen extends StatelessWidget {
           ),
         ),
 
-        // Nanti di sini bisa ditambah TextField & list hasil search
+        // Konten utama
         Expanded(
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: const [
-                Icon(Icons.location_searching, size: 64, color: Colors.grey),
+                Icon(
+                  Icons.location_searching,
+                  size: 64,
+                  color: Colors.grey,
+                ),
                 SizedBox(height: 16),
                 Text(
                   'Halaman pencarian Smart Drop Box',
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey,
+                  ),
                 ),
                 SizedBox(height: 8),
-                Text(,
+                Text(
+                  'Silakan ketik nama lokasi atau alamat untuk mulai mencari.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),

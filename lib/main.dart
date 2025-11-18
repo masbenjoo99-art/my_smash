@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/login_screen.dart'; // Import login screen
 import 'db/database_helper.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'dart:io';
@@ -37,6 +37,7 @@ class RecycleApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Poppins', // Set default font family
       ),
       home: const SplashScreen(),
     );
@@ -51,29 +52,39 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool _isInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Hanya set timer di initState, precacheImage di didChangeDependencies
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const LoginScreen()),
+        );
+      }
+    });
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _initializeAndNavigate();
+    if (!_isInitialized) {
+      _isInitialized = true;
+      _precacheImages();
+    }
   }
 
-  Future<void> _initializeAndNavigate() async {
-    // Pastikan widget sudah mount
-    await Future.delayed(Duration.zero);
-
-    // Precache logo
-    await precacheImage(
-      const AssetImage('assets/images/recyle.png'),
-      context,
-    );
-
-    // Durasi splash 3 detik
-    await Future.delayed(const Duration(seconds: 3));
-
-    if (mounted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+  Future<void> _precacheImages() async {
+    try {
+      await precacheImage(
+        const AssetImage('assets/images/recyle.png'),
+        context,
       );
+      debugPrint("✅ Logo berhasil di-precache");
+    } catch (e) {
+      debugPrint("❌ Gagal memuat logo: $e");
     }
   }
 
@@ -89,6 +100,15 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 24),
             const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Recycle App',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
             ),
           ],
         ),
@@ -119,5 +139,5 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       },
     );
-  } 
+  }
 }
