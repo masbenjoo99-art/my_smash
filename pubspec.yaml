@@ -52,6 +52,15 @@ flutter:
     - assets/images/icon_bank_sampah.png
     - assets/images/icon_smart_drop_box.png
     - assets/images/coment.png
+    - assets/images/profil_nav.png
+    - assets/images/home_nav.png
+    - assets/images/history_nav.png
+    - assets/images/edu_nav.png
+    - assets/images/scan_nav.png
+    - assets/images/icon_history.png
+    - assets/images/icon_history2.png
+    - assets/images/location_white.png
+    
     
     
 

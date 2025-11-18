@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_smash/widgets/app_bar.dart';
 import 'package:my_smash/widgets/bottom_nav_bar.dart';
 import 'package:my_smash/screens/bank_search_page.dart';
-import 'package:my_smash/screens/smart_drop_box_search_page.dart';
+import 'package:my_smash/screens/smart_drop_box_search_screen.dart';
 
 /// ====================
 /// 1. HALAMAN UTAMA HISTORY
@@ -34,7 +34,12 @@ class HistoryScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _HistoryMenuButton(
-                icon: Icons.home_outlined,
+                icon: Image.asset(
+                  'assets/images/icon_history.png',
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.contain,
+                ),
                 label: 'Bank Sampah',
                 onTap: () {
                   Navigator.push(
@@ -47,7 +52,12 @@ class HistoryScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               _HistoryMenuButton(
-                icon: Icons.delete_outline,
+                icon: Image.asset(
+                  'assets/images/icon_history2.png',
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.contain,
+                ),
                 label: 'Smart Drop Box',
                 onTap: () {
                   Navigator.push(
@@ -68,7 +78,7 @@ class HistoryScreen extends StatelessWidget {
 
 /// Tombol oranye seperti di desain
 class _HistoryMenuButton extends StatelessWidget {
-  final IconData icon;
+  final Widget icon;          // sekarang menerima Widget, bukan IconData
   final String label;
   final VoidCallback onTap;
 
@@ -92,7 +102,11 @@ class _HistoryMenuButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
             child: Row(
               children: [
-                Icon(icon, color: Colors.white, size: 32),
+                SizedBox(
+                  width: 32,
+                  height: 32,
+                  child: icon,
+                ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
@@ -132,7 +146,6 @@ class BankSampahHistoryScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // box icon
             Image.asset(
               'assets/images/box.png',
               width: 160,
@@ -157,7 +170,6 @@ class BankSampahHistoryScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                // 👉 Navigasi ke halaman pencarian bank sampah
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -230,7 +242,7 @@ class SmartDropBoxHistoryScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const SmartDropBoxSearchPage(),
+                      builder: (_) => const SmartDropBoxSearchScreen(),
                     ),
                   );
                 },

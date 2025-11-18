@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../banksampah/bank_search_screen.dart';
 
@@ -9,6 +8,7 @@ class BankSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // 🔵 APP BAR ATAS
       appBar: AppBar(
         backgroundColor: const Color(0xFF216BC2),
         elevation: 0,
@@ -18,20 +18,25 @@ class BankSearchPage extends StatelessWidget {
         ),
         title: SizedBox(
           height: 32,
-          child: Image.asset('assets/images/logo.png', fit: BoxFit.contain),
+          child: Image.asset(
+            'assets/images/logo.png',
+            fit: BoxFit.contain,
+          ),
         ),
+        centerTitle: false,
       ),
 
       backgroundColor: Colors.white,
       bottomNavigationBar: const BottomNavBar(selectedIndex: 0),
 
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(height: 8),
 
             // 🔵 BANNER
             Container(
-              margin: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               height: 150,
               width: double.infinity,
               decoration: BoxDecoration(
@@ -43,53 +48,51 @@ class BankSearchPage extends StatelessWidget {
               ),
             ),
 
-            // 🔵 CARD PUTIH BESAR
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  )
-                ],
-              ),
+            const SizedBox(height: 16),
 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  const Text(
-                    "Bank Sampah",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+            // 🔵 CARD PUTIH BESAR (ISI BISA SCROLL DI DALAMNYA)
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16)
+                    .copyWith(bottom: 12),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.08),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
                     ),
-                  ),
-
-                  const SizedBox(height: 4),
-
-                  const Text(
-                    "Cari bank sampah di sekitarmu!",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Bank Sampah",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      "Cari bank sampah di sekitarmu!",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
-                  const SizedBox(height: 16),
-
-                  // 🔍 SEARCH & LIST — dari BankSearchScreen
-                  SizedBox(
-                    height: 520,
-                    child: BankSearchScreen(),
-                  ),
-
-                ],
+                    // 👉 ISI: SEARCH + LIST (dari BankSearchScreen)
+                    const Expanded(
+                      child: BankSearchScreen(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

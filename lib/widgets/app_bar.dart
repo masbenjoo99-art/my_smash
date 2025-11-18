@@ -38,10 +38,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             );
           },
           icon: Image.asset(
-            'assets/images/coment.png',  // ← Gambar baru yang kamu inginkan
-            width: 24,
-            height: 24,
-            color: Colors.white,        // kalau mau warna asli, hapus baris ini
+            'assets/images/coment.png', 
+            width: 30,
+            height: 30,
+            color: Colors.white,   
           ),
         ),
 

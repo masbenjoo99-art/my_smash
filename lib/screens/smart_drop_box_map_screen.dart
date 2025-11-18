@@ -12,8 +12,11 @@ class SmartDropBoxMapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Peta Smart Drop Box"),
-        backgroundColor: Colors.blue,
+        title: SizedBox(
+          height: 32,
+          child: Image.asset('assets/images/logo.png', fit: BoxFit.contain),
+        ),
+        backgroundColor: const Color(0xFF216BC2),
       ),
       body: selectedSDB.isEmpty
           ? const Center(child: Text("Belum ada Smart Drop Box untuk lokasi ini"))

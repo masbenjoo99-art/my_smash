@@ -5,7 +5,7 @@ import '../widgets/waste_category.dart';
 import '../widgets/waste_location_card.dart';
 import '../screens/main_screen.dart';
 import '../screens/bank_search_page.dart';
-import '../screens/smart_drop_box_search_page.dart';
+import '../screens/smart_drop_box_search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const SmartDropBoxSearchPage(),
+                        builder: (_) => const SmartDropBoxSearchScreen(),
                       ),
                     );
                   },
